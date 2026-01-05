@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-        "log"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
@@ -11,7 +11,7 @@ import (
 )
 
 const (
-        ViviSusStickerId = "1456174507059314861"
+	ViviSusStickerId = "1456174507059314861"
 )
 
 var (
@@ -58,11 +58,11 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-        if m.Content == "<@1457443748601659554>" {
-                s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
-                        StickerIDs: []string{ViviSusStickerId},
-                })
-        }
+	if m.Content == "<@1457443748601659554>" {
+		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
+			StickerIDs: []string{ViviSusStickerId},
+		})
+	}
 
 	if m.Content == "!test" {
 		s.ChannelMessageSend(m.ChannelID, "test")
