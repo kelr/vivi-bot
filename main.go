@@ -8,6 +8,7 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -26,6 +27,7 @@ var (
 
 func main() {
 	flag.Parse()
+	rand.Seed(time.Now().UnixNano())
 	if *Token == "" {
 		log.Fatal("Missing discord auth token flag, provide it with -t")
 	}
@@ -75,14 +77,14 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 func SendViviSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if strings.Contains(m.Content, "<@1457571257766772957>") {
 		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
-			StickerIDs: SelectViviSticker(),
+			StickerIDs: []string{SelectViviSticker()},
 		})
 	}
 }
 
-func SelectViviSticker() []string {
+func SelectViviSticker() string {
 	stickerIndex := rand.Intn(len(ViviSusStickers))
-	return []string{ViviSusStickers[stickerIndex]}
+	return ViviSusStickers[stickerIndex]
 }
 
 func SendLockInSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
