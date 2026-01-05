@@ -3,24 +3,31 @@ package main
 import (
 	"flag"
 	"log"
+	"math/rand"
 	"os"
 	"os/signal"
 	"strings"
 	"syscall"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 const (
-	ViviSusStickerId = "1456174507059314861"
+	BanchoLockIn  = "1447975441183936736"
+	ViviSusLeft   = "1456174507059314861"
+	ViviSusCenter = "1457213252839932067"
+	ViviSusRight  = "1457228017590861834"
 )
 
 var (
-	Token = flag.String("t", "", "Bot authentication token")
+	Token           = flag.String("t", "", "Bot authentication token")
+	ViviSusStickers = []string{ViviSusLeft, ViviSusCenter, ViviSusRight}
 )
 
 func main() {
 	flag.Parse()
+	rand.Seed(time.Now().UnixNano())
 	if *Token == "" {
 		log.Fatal("Missing discord auth token flag, provide it with -t")
 	}
@@ -59,14 +66,31 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	if strings.Contains(m.Content, "<@1457443748601659554>") {
-		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
-			StickerIDs: []string{ViviSusStickerId},
-		})
-	}
+	SendViviSticker(s, m)
+	SendLockInSticker(s, m)
 
 	if m.Content == "!test" {
 		s.ChannelMessageSend(m.ChannelID, "test")
 	}
+}
 
+func SendViviSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
+	if strings.Contains(m.Content, "<@1457571257766772957>") {
+		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
+			StickerIDs: []string{SelectViviSticker()},
+		})
+	}
+}
+
+func SelectViviSticker() string {
+	stickerIndex := rand.Intn(len(ViviSusStickers))
+	return ViviSusStickers[stickerIndex]
+}
+
+func SendLockInSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
+	if strings.Contains(strings.ToLower(m.Content), "lock in") {
+		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
+			StickerIDs: []string{BanchoLockIn},
+		})
+	}
 }
