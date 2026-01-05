@@ -75,7 +75,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 }
 
 func SendViviSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
-	if strings.Contains(m.Content, "<@1457571257766772957>") {
+	if strings.Contains(m.Content, "<@1457443748601659554>") {
 		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
 			StickerIDs: []string{SelectViviSticker()},
 		})
