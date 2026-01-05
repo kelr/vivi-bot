@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 
 	"github.com/bwmarrin/discordgo"
@@ -58,7 +59,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	if m.Content == "<@1457443748601659554>" {
+	if strings.Contains(m.Content, "<@1457443748601659554>") {
 		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
 			StickerIDs: []string{ViviSusStickerId},
 		})
