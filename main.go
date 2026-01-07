@@ -91,8 +91,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	// Message handlers
-	SendViviSticker(s, m)
-	SendLockInSticker(s, m)
+	ReactToMessageWithSticker(s, m)
 	ReactToMessageWithEmoji(s, m)
 
 	if m.Content == "!test" {
@@ -100,29 +99,25 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 }
 
-// Sends Vivi sticker when the bot is mentioned
-func SendViviSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
+// Listens to messages and sends a sticker when a match is detected
+func ReactToMessageWithSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
+	// Sends Vivi sticker when the bot is mentioned
 	if strings.Contains(m.Content, "<@1457443748601659554>") {
-		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
-			StickerIDs: []string{selectRandom(ViviSusStickers)},
-		})
+		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{selectRandom(ViviSusStickers)}})
 	}
-}
-
-// Send Bancho Lock In sticker when someone mentions "lock in"
-func SendLockInSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
+	// Send Bancho Lock In sticker when someone mentions "lock in"
 	if lockInRegexCompiled.MatchString(m.Content) {
-		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
-			StickerIDs: []string{BanchoLockInSticker},
-		})
+		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{BanchoLockInSticker}})
 	}
 }
 
-// Reacts to messages containing "omg sui" or "omg peko" with corresponding emojis
+// Reacts to messages with emojis when a match is detected
 func ReactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
+	// Reacts with a random Sui emoji when "omg sui" is mentioned
 	if omgSuiRegexCompiled.MatchString(m.Content) {
 		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgSuiEmojis))
 	}
+	// Reacts with a random Peko emoji when "omg peko" is mentioned
 	if omgPekoRegexCompiled.MatchString(m.Content) {
 		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgPekoEmojis))
 	}
