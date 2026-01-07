@@ -15,6 +15,9 @@ import (
 )
 
 const (
+	ProdViviBotId       = "<@1457443748601659554>"
+	BakeyLocalTestBotId = "<@1457571257766772957>"
+
 	// Guild bound
 	BanchoLockInSticker  = "1447975441183936736"
 	ViviSusLeftSticker   = "1456174507059314861"
@@ -102,7 +105,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 // Listens to messages and sends a sticker when a match is detected
 func ReactToMessageWithSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Sends Vivi sticker when the bot is mentioned
-	if strings.Contains(m.Content, "<@1457443748601659554>") {
+	if strings.Contains(m.Content, ProdViviBotId) {
 		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{selectRandom(ViviSusStickers)}})
 	}
 	// Send Bancho Lock In sticker when someone mentions "lock in"
