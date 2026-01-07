@@ -44,7 +44,7 @@ var (
 	// Precompile regex
 	lockInRegexCompiled  = regexp.MustCompile(`(?i)\b(lock(?:ed|ing|s)?[-\s]?in)\b`)
 	omgSuiRegexCompiled  = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?sui+)\b`)
-	omgPekoRegexCompiled = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?peko+)\b`)
+	omgPekoRegexCompiled = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?pe(k|g)o+)\b`)
 
 	// List of stickers and emojis to randomly select from
 	ViviSusStickers = []string{ViviSusLeftSticker, ViviSusCenterSticker, ViviSusRightSticker}
