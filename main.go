@@ -102,12 +102,13 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
+	
+	
+	reactToMessageWithSticker(s, m)
 
 	// Sanitize whitespace in message content
 	m.Content = sanitize.AlphaNumeric(m.Content, true)
-
 	// Message handlers
-	reactToMessageWithSticker(s, m)
 	reactToMessageWithEmoji(s, m)
 
 	if m.Content == "!test" {
