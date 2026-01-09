@@ -52,7 +52,7 @@ var (
 	OmgFuwaMocoEmojis = [][]string{{FuwawaBite, MococoBite}, {FuwawaBau, MococoBau}, {FuwawaEhehe, MococoHOEH3}, {FuwawaEhehe2, MococoHOEH2}, {FuwawaDoro, MococoDoro}}
 	OmgFuwawaEmojis   = []string{FuwawaYay, FuwawaBau, FuwawaEhehe, FuwawaEhehe2, FuwawaPeek, FuwawaMou}
 	OmgMococoEmojis   = []string{MococoCool, MococoBlink, MococoNod, MococoNod2, MococoBau, MococoHappy, MococoJamFast}
-	OmgBaeEmojis      = []string{BaePog, BaePogey, BaeAhoy, BaeDoro, BaeSewer, BaeCool, BaeBlush, BaeBreakdance, BaeBreakdanceFast, BaeBreakdanceFastest, BaeLove, BaeNod, BaePogU, BaeSmug2, BaeSmug1, BaeWave, BaeWink}
+	OmgBaeEmojis      = []string{BaePog, BaePogey, BaeAhoy, BaeDoro, BaeSewer, BaeCool, BaeBlush, BaeBreakdance, BaeBreakdanceFast, BaeBreakdanceFastest, BaeLove, BaeNod, BaePogU, BaeSmug2, BaeSmug1, BaeWave, BaeWink, RAAAAAAT}
 
 	OmgLuiEmojis   = []string{madaikanai}
 	OmgLamyEmojis  = []string{madaikanai}
