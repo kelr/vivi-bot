@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"math/rand"
 	"os"
@@ -12,44 +13,53 @@ import (
 	"time"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/mrz1836/go-sanitize"
 )
 
 const (
 	ProdViviBotId       = "<@1457443748601659554>"
 	BakeyLocalTestBotId = "<@1457571257766772957>"
-
-	// Guild bound
-	BanchoLockInSticker  = "1447975441183936736"
-	ViviSusLeftSticker   = "1456174507059314861"
-	ViviSusCenterSticker = "1457213252839932067"
-	ViviSusRightSticker  = "1457228017590861834"
-
-	// App bound
-	PekoPogEmoji       = "1458287997815361650"
-	PekoHappyEmoji     = "1458289554715840583"
-	PekoFeelGoodEmoji  = "1458289480741163091"
-	PekoHeheEmoji      = "1458289430048673967"
-	PekoFeelGood2Emoji = "1458289895544983644"
-
-	SuiWobbleEmoji = "1458287981277216838"
-	SuiSwayEmoji   = "1458288617985146951"
-	SuiDanceEmoji  = "1458288483813822686"
-	SuiWavyEmoji   = "1458288381271216138"
-	SuiBounceEmoji = "1458288349927309467"
 )
 
 var (
 	Token = flag.String("t", "", "Bot authentication token")
 
 	// Precompile regex
-	lockInRegexCompiled  = regexp.MustCompile(`(?i)\b(lock(?:ed|ing|s)?[-\s]?in)\b`)
-	omgSuiRegexCompiled  = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?sui+)\b`)
-	omgPekoRegexCompiled = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?pe(k|g)o+)\b`)
+	LockInRegexCompiled        = regexp.MustCompile(`(?i)\b(lock(?:ed|ing|s)?[-\s]?in)\b`)
+	OmgSuiRegexCompiled        = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?sui+)\b`)
+	OmgPekoRegexCompiled       = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?pe(k|g)o+)\b`)
+	OmgTowaRegexCompiled       = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?towa+(sama)?)\b`)
+	OmgLuiRegexCompiled        = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?(lui|looi)+)\b`)
+	OmgCCRegexCompiled         = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?cc)\b`)
+	OmgGGRegexCompiled         = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?gg)\b`)
+	OmgAutoFisterRegexCompiled = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?(autofister|ccgg))\b`)
+	OmgLamyRegexCompiled       = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?(l|w)amy+)\b`)
+	OmgBaeRegexCompiled        = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?(hakos|bae|baelz|rat))\b`)
+	OmgViviRegexCompiled       = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?vivi+)\b`)
+	OmgRaoraRegexCompiled      = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?raora)\b`)
+	OmgFuwaMocoRegexCompiled   = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?(fuwamoco|fwmc))\b`)
+	OmgMocoFuwaRegexCompiled   = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?(mocofuwa))\b`)
+	OmgFuwawaRegexCompiled     = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?(fuwawa))\b`)
+	OmgMococoRegexCompiled     = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?(mococo))\b`)
 
 	// List of stickers and emojis to randomly select from
-	ViviSusStickers = []string{ViviSusLeftSticker, ViviSusCenterSticker, ViviSusRightSticker}
-	OmgSuiEmojis    = []string{SuiWobbleEmoji, SuiSwayEmoji, SuiDanceEmoji, SuiWavyEmoji, SuiBounceEmoji}
-	OmgPekoEmojis   = []string{PekoPogEmoji, PekoHappyEmoji, PekoFeelGoodEmoji, PekoHeheEmoji, PekoFeelGood2Emoji}
+	ViviSusStickers   = []string{ViviSusLeftSticker, ViviSusCenterSticker, ViviSusRightSticker}
+	OmgSuiEmojis      = []string{SuiWobble, SuiSway, SuiDance, SuiWavy, SuiBounce, SuiAha, SuiFukkireta, SuiPuppet, SuiLaugh, SuiLaugh2, SuiVibe, SuiOrbitalSpin, SuiPuppetKocchi}
+	OmgPekoEmojis     = []string{PekoPog, PekoHappy, PekoFeelGood, PekoHehe, PekoFeelGood2}
+	OmgTowaEmojis     = []string{TowaNuma, TowaDance, TowaLaugh, TowaCool, TowaPose, TowaBapFast, TowaSpin, TowaHug, TowaHeadbang, TowaBlush}
+	OmgCCEmojis       = []string{CCCool, CCSmug, CCParty, CCCheer, CCDoro, CCWave, CCShake, CCWide}
+	OmgGGEmojis       = []string{GigiNod, GigiBleh, GigiPeek, GigiHug, GigiHD, GigiFukkireta, GigiJam, GigiDoro, GigiCool, GigiBark}
+	OmgFuwaMocoEmojis = [][]string{{FuwawaBite, MococoBite}, {FuwawaBau, MococoBau}, {FuwawaEhehe, MococoHOEH3}, {FuwawaEhehe2, MococoHOEH2}, {FuwawaDoro, MococoDoro}}
+	OmgFuwawaEmojis   = []string{FuwawaYay, FuwawaBau, FuwawaEhehe, FuwawaEhehe2, FuwawaPeek, FuwawaMou}
+	OmgMococoEmojis   = []string{MococoCool, MococoBlink, MococoNod, MococoNod2, MococoBau, MococoHappy, MococoJamFast}
+	OmgBaeEmojis      = []string{BaePog, BaePogey, BaeAhoy, BaeDoro, BaeSewer, BaeCool, BaeBlush, BaeBreakdance, BaeBreakdanceFast, BaeBreakdanceFastest, BaeLove, BaeNod, BaePogU, BaeSmug2, BaeSmug1, BaeWave, BaeWink}
+
+	OmgLuiEmojis   = []string{madaikanai}
+	OmgLamyEmojis  = []string{madaikanai}
+	OmgViviEmojis  = []string{madaikanai}
+	OmgRaoraEmojis = []string{madaikanai}
+
+	LocalTestEmojis = []string{LocalTestEmoji, LocalTestEmoji2, LocalTestEmoji3}
 )
 
 func main() {
@@ -93,9 +103,12 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
+	// Sanitize whitespace in message content
+	m.Content = sanitize.AlphaNumeric(m.Content, true)
+
 	// Message handlers
-	ReactToMessageWithSticker(s, m)
-	ReactToMessageWithEmoji(s, m)
+	reactToMessageWithSticker(s, m)
+	reactToMessageWithEmoji(s, m)
 
 	if m.Content == "!test" {
 		s.ChannelMessageSend(m.ChannelID, "test")
@@ -103,27 +116,74 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 }
 
 // Listens to messages and sends a sticker when a match is detected
-func ReactToMessageWithSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
+func reactToMessageWithSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Sends Vivi sticker when the bot is mentioned
 	if strings.Contains(m.Content, ProdViviBotId) {
 		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{selectRandom(ViviSusStickers)}})
 	}
 	// Send Bancho Lock In sticker when someone mentions "lock in"
-	if lockInRegexCompiled.MatchString(m.Content) {
+	if LockInRegexCompiled.MatchString(m.Content) {
 		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{BanchoLockInSticker}})
 	}
 }
 
 // Reacts to messages with emojis when a match is detected
-func ReactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
-	// Reacts with a random Sui emoji when "omg sui" is mentioned
-	if omgSuiRegexCompiled.MatchString(m.Content) {
+func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
+	if OmgSuiRegexCompiled.MatchString(m.Content) {
 		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgSuiEmojis))
 	}
-	// Reacts with a random Peko emoji when "omg peko" is mentioned
-	if omgPekoRegexCompiled.MatchString(m.Content) {
+	if OmgPekoRegexCompiled.MatchString(m.Content) {
 		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgPekoEmojis))
 	}
+	if OmgTowaRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgTowaEmojis))
+	}
+	if OmgCCRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgCCEmojis))
+	}
+	if OmgGGRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgGGEmojis))
+	}
+	if OmgAutoFisterRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+FluffyCC)
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+FuzzyGG)
+	}
+	if OmgMocoFuwaRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+MococoDoro)
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+FuwawaDoro)
+	}
+	if OmgFuwaMocoRegexCompiled.MatchString(m.Content) {
+		fwmcPair := OmgFuwaMocoEmojis[rand.Intn(len(OmgFuwaMocoEmojis))]
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+fwmcPair[0])
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+fwmcPair[1])
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+Bau1)
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+Bau2)
+	}
+	if OmgFuwawaRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgFuwawaEmojis))
+		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("<@%s> **WHAT ABOUT MOCOCOEH!?**", m.Author.ID))
+		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{MococoHOEHSticker}})
+	}
+	if OmgMococoRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgMococoEmojis))
+	}
+	if OmgBaeRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgBaeEmojis))
+	}
+	if OmgLuiRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgLuiEmojis))
+	}
+	if OmgLamyRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgLamyEmojis))
+	}
+	if OmgViviRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgViviEmojis))
+	}
+	// TODO: see DM's
+	if OmgRaoraRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgRaoraEmojis))
+	}
+	// TODO: Convert into a table and loop thru for the repeated code
 }
 
 // Randomly selects an element from a slice of strings
