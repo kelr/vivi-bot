@@ -53,7 +53,6 @@ var (
 		"coco":     newHoloMemKVP("coco|kaichou", Placeholders),
 		"flare":    newHoloMemKVP("flare|fuutan|(shira)?nui", Placeholders),
 		"fubuki":   newHoloMemKVP("fbk|fubuki|foobs?|friend|fubuchan|shirakami|fubuking", Placeholders),
-		"fuwawa":   newHoloMemKVP("fuwawa|fuwachan", OmgFuwawaEmojis),
 		"gigi":     newHoloMemKVP("gigi|gg|geegee|fister|dafister|gpain", OmgGGEmojis),
 		"gura":     newHoloMemKVP("gura|goom?ba|goob(idiba)?|same|gawr", Placeholders),
 		"haachama": newHoloMemKVP("haachama|haato", Placeholders),
