@@ -101,10 +101,6 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+FluffyCC)
 		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+FuzzyGG)
 	}
-	if OmgMocoFuwaRegexCompiled.MatchString(m.Content) {
-		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+MococoDoro)
-		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+FuwawaDoro)
-	}
 	if OmgFuwaMocoRegexCompiled.MatchString(m.Content) {
 		fwmcPair := OmgFuwaMocoEmojis[rand.Intn(len(OmgFuwaMocoEmojis))]
 		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+fwmcPair[0])
@@ -112,9 +108,13 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+Bau1)
 		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+Bau2)
 	}
+	if OmgMocoFuwaRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+MococoDoro)
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+FuwawaDoro)
+	}
 	if OmgFuwawaRegexCompiled.MatchString(m.Content) {
 		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgFuwawaEmojis))
-		if !OmgMococoRegexCompiled.MatchString(m.Content) {
+		if !OmgMococoRegexCompiled.MatchString(m.Content) && !OmgFuwaMocoRegexCompiled.MatchString(m.Content) && !OmgMocoFuwaRegexCompiled.MatchString(m.Content) {
 			s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("<@%s> **WHAT ABOUT MOCOCOEH!?**", m.Author.ID))
 			s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{MococoHOEHSticker}})
 		}
