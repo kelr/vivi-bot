@@ -101,7 +101,7 @@ var (
 		"sayaka":   newHoloMemKVP("sayaka|hanazono", Placeholders),
 		"shion":    newHoloMemKVP("shion|garlic|murasaki", Placeholders),
 		"shiori":   newHoloMemKVP("shiorin?", Placeholders),
-		"sora":     newHoloMemKVP("so[rd]a(chan|san)?", Placeholders),
+		"sora":     newHoloMemKVP(`so[rd]a([-\s]?(chan|san))?`, Placeholders),
 		"su":       newHoloMemKVP(`su([-\s]?chan)|mizumiya`, Placeholders),
 		"subaru":   newHoloMemKVP("subaru|duck|oozora|shuba|subacchi", Placeholders),
 		"towa":     newHoloMemKVP(`towa([-\s]sama)?`, OmgTowaEmojis),
