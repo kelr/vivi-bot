@@ -4,6 +4,8 @@ const (
 	LocalTestEmoji  = "1388643316425556028"
 	LocalTestEmoji2 = "1458979972281532651"
 	LocalTestEmoji3 = "1458980025960370266"
+	//madaikanai        = "1388006694637797447" // Local Placeholder emoji
+	LocallTestSticker = "1406295250871386112"
 
 	// Guild bound
 	madaikanai = "1459014055414206525" // Placeholder emoji
@@ -111,5 +113,41 @@ const (
 	BaeSmug1             = "1459003798415736955"
 	BaeWave              = "1459003801443897529"
 	BaeWink              = "1459003803201310751"
-	RAAAAAAT             = "1459017080132337737"
+	BaeWhimsy            = "1459017080132337737"
+
+	FaunaUUUUU  = "1459422819992604776"
+	FaunaCheer  = "1459700929677754533"
+	FaunaCozy   = "1459700931322187940"
+	FaunaCool   = "1459700933670862909"
+	FaunaNuma   = "1459700935407440088"
+	FaunaPeek   = "1459700937261322274"
+	FaunaNod    = "1459700938720940156"
+	FaunaYay    = "1459700940394332385"
+	FaunaWave   = "1459700941740703918"
+	FaunaAngel  = "1459700943346995434"
+	FaunaLaying = "1459700945448472771"
+	FaunaAra    = "1459700946790776977"
+	FaunaAhoy   = "1459700948040421460"
+	FaunaWave2  = "1459700949537783933"
+	FaunaXD     = "1459700951123230974"
+)
+
+var (
+	// List of stickers and emojis to randomly select from
+	ViviSusStickers   = []string{ViviSusLeftSticker, ViviSusCenterSticker, ViviSusRightSticker}
+	OmgSuiEmojis      = []string{SuiWobble, SuiSway, SuiDance, SuiWavy, SuiBounce, SuiAha, SuiFukkireta, SuiPuppet, SuiLaugh, SuiLaugh2, SuiVibe, SuiOrbitalSpin, SuiPuppetKocchi}
+	OmgPekoEmojis     = []string{PekoPog, PekoHappy, PekoFeelGood, PekoHehe, PekoFeelGood2}
+	OmgTowaEmojis     = []string{TowaNuma, TowaDance, TowaLaugh, TowaCool, TowaPose, TowaBapFast, TowaSpin, TowaHug, TowaHeadbang, TowaBlush}
+	OmgCCEmojis       = []string{CCCool, CCSmug, CCParty, CCCheer, CCDoro, CCWave, CCShake, CCWide}
+	OmgGGEmojis       = []string{GigiNod, GigiBleh, GigiPeek, GigiHug, GigiHD, GigiFukkireta, GigiJam, GigiDoro, GigiCool, GigiBark}
+	OmgFuwaMocoEmojis = [][]string{{FuwawaBite, MococoBite}, {FuwawaBau, MococoBau}, {FuwawaEhehe, MococoHOEH3}, {FuwawaEhehe2, MococoHOEH2}, {FuwawaDoro, MococoDoro}}
+	OmgFuwawaEmojis   = []string{FuwawaYay, FuwawaBau, FuwawaEhehe, FuwawaEhehe2, FuwawaPeek, FuwawaMou}
+	OmgMococoEmojis   = []string{MococoCool, MococoBlink, MococoNod, MococoNod2, MococoBau, MococoHappy, MococoJamFast}
+	OmgBaeEmojis      = []string{BaePog, BaePogey, BaeAhoy, BaeDoro, BaeSewer, BaeCool, BaeBlush, BaeBreakdance, BaeBreakdanceFast, BaeBreakdanceFastest, BaeLove, BaeNod, BaePogU, BaeSmug2, BaeSmug1, BaeWave, BaeWink, BaeWhimsy}
+	OmgFaunaEmojis    = []string{FaunaUUUUU, FaunaCheer, FaunaCozy, FaunaCool, FaunaNuma, FaunaPeek, FaunaNod, FaunaYay, FaunaWave, FaunaAngel, FaunaLaying, FaunaAra, FaunaAhoy, FaunaWave2, FaunaXD}
+
+	Placeholders      = []string{madaikanai}
+	LocalTestEmojis1  = []string{"1459399252580237573", "1459399250948653272", "1459399249535041547"}
+	LocalTestEmojis2  = []string{"1459399288676417675", "1459399287568990250", "1459399286470082742"}
+	LocalTestStickers = []string{LocallTestSticker}
 )
