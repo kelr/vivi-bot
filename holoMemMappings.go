@@ -75,7 +75,7 @@ var (
 		"luna":     newHoloMemKVP("luna", Placeholders),
 		"marine":   newHoloMemKVP("marine|marin|maririn|baba|ahoy|senchou", Placeholders),
 		"matsuri":  newHoloMemKVP("matsuri|natsuiro|god", Placeholders),
-		"michiru":  newHoloMemKVP("michiru|(ihihi(-?san|-?chan))?", Placeholders),
+		"michiru":  newHoloMemKVP("michiru|ihihi(-?san|-?chan)?", Placeholders),
 		"miko":     newHoloMemKVP("mi[kg]o", Placeholders),
 		"mio":      newHoloMemKVP("mio(sha)?", Placeholders),
 		"moona":    newHoloMemKVP("moona|hoshinova", Placeholders),
