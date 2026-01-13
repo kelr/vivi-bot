@@ -87,11 +87,11 @@ func reactToMessageWithSticker(s *discordgo.Session, m *discordgo.MessageCreate)
 
 // Reacts to messages with emojis when a match is detected
 func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
-
 	// TODO: Use a parallelization package if this ever grows large enough to matter
 	// Dynamically loop thru OmgMemNameMappings and look for matches
 	for _, holoMemKVP := range OmgMemNameMappings {
 		if holoMemKVP.RegexExpr.MatchString(m.Content) {
+			log.Println("matched expression:", holoMemKVP.RegexExpr.String())
 			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(holoMemKVP.EmojiList))
 		}
 	}
