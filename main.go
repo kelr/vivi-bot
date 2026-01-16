@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"os"
 	"os/signal"
+	"sort"
 	"strings"
 	"syscall"
 	"time"
@@ -87,40 +88,50 @@ func reactToMessageWithSticker(s *discordgo.Session, m *discordgo.MessageCreate)
 
 // Reacts to messages with emojis when a match is detected
 func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
-	// TODO: Use a parallelization package if this ever grows large enough to matter
-	// Dynamically loop thru OmgMemNameMappings and look for matches
-	for _, holoMemKVP := range OmgMemNameMappings {
-		if holoMemKVP.RegexExpr.MatchString(m.Content) {
-			log.Println("matched expression:", holoMemKVP.RegexExpr.String())
-			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(holoMemKVP.EmojiList))
+	// Sui first no matter what because we are not a cult
+	if OmgSuiRegexCompiled.MatchString(m.Content) {
+		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgSuiEmojis))
+	}
+
+	// Store matched "omg mem" from the message with their index
+	matches := []RegexMatch{}
+	matchedNames := map[string]bool{}
+
+	// Dynamically loop thru OmgMemNameMappings and look for matches within the text and store an indexed list
+	for name, holoMemKVP := range OmgMemNameMappings {
+		regexMatch := holoMemKVP.RegexExpr.FindStringIndex(m.Content)
+		if regexMatch != nil {
+			matches = append(matches, RegexMatch{name: name, idx: regexMatch[0], KVP: holoMemKVP})
+			matchedNames[name] = true
 		}
 	}
 
-	// Custom case handling
-	if OmgAutoFisterRegexCompiled.MatchString(m.Content) {
-		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+FluffyCC)
-		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+FuzzyGG)
-	}
-	if OmgFuwaMocoRegexCompiled.MatchString(m.Content) {
-		fwmcPair := OmgFuwaMocoEmojis[rand.Intn(len(OmgFuwaMocoEmojis))]
-		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+fwmcPair[0])
-		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+fwmcPair[1])
-		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+Bau1)
-		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+Bau2)
-	}
-	if OmgMocoFuwaRegexCompiled.MatchString(m.Content) {
-		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+MococoDoro)
-		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+FuwawaDoro)
-	}
-	if OmgFuwawaRegexCompiled.MatchString(m.Content) {
-		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgFuwawaEmojis))
-		if !OmgMococoRegexCompiled.MatchString(m.Content) && !OmgFuwaMocoRegexCompiled.MatchString(m.Content) && !OmgMocoFuwaRegexCompiled.MatchString(m.Content) {
-			s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("<@%s> **WHAT ABOUT MOCOCOEH!?**", m.Author.ID))
-			s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{MococoHOEHSticker}})
+	// Sort the matches by index to order the emoji output
+	sort.Slice(matches, func(i, j int) bool {
+		return matches[i].idx < matches[j].idx
+	})
+
+	// React to messages according to order of matches
+	for _, match := range matches {
+		switch match.name {
+		// Special case handling
+		case "fuwamoco":
+			fwmcPair := OmgFuwaMocoEmojis[rand.Intn(len(OmgFuwaMocoEmojis))]
+			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+fwmcPair[0])
+			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+fwmcPair[1])
+			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+Bau1)
+			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+Bau2)
+		case "fuwawa":
+			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(match.KVP.EmojiList[0]))
+			if !matchedNames["mococo"] && !matchedNames["fuwamoco"] && !matchedNames["mocofuwa"] && !matchedNames["advent"] {
+				s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("<@%s> **WHAT ABOUT MOCOCOEH!?**", m.Author.ID))
+				s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{MococoHOEHSticker}})
+			}
+		default:
+			for _, emojis := range match.KVP.EmojiList {
+				s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(emojis))
+			}
 		}
-	}
-	if uuuuuCompiled.MatchString(m.Content) {
-		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+FaunaUUUUU)
 	}
 }
 

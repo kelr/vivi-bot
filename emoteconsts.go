@@ -17,6 +17,8 @@ const (
 	MococoHOEHSticker    = "1458986580147568650"
 
 	// App bound
+	LockInEmoji = "1461532285319774302"
+
 	PekoPog             = "1458287997815361650"
 	PekoHappy           = "1458289554715840583"
 	PekoFeelGood        = "1458289480741163091"
