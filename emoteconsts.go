@@ -1,24 +1,35 @@
 package main
 
 const (
-	LocalTestEmoji  = "1388643316425556028"
-	LocalTestEmoji2 = "1458979972281532651"
-	LocalTestEmoji3 = "1458980025960370266"
-	//madaikanai        = "1388006694637797447" // Local Placeholder emoji
-	LocallTestSticker = "1406295250871386112"
+	/// External Server
+	GetsuyoubiSticker = "1363559590603657538"
 
-	// Guild bound
-	madaikanai = "1459014055414206525" // Placeholder emoji
-
-	BanchoLockInSticker  = "1447975441183936736"
-	ViviSusLeftSticker   = "1456174507059314861"
-	ViviSusCenterSticker = "1457213252839932067"
-	ViviSusRightSticker  = "1457228017590861834"
-	MococoHOEHSticker    = "1458986580147568650"
+	/// Guild bound
+	BanchouLockInSticker  = "1447975441183936736"
+	ViviSusLeftSticker    = "1456174507059314861"
+	ViviSusCenterSticker  = "1457213252839932067"
+	ViviSusRightSticker   = "1457228017590861834"
+	MococoHOEHSticker     = "1458986580147568650"
+	WillBeThereSticker    = "1447412433273491518"
+	MightBeThereSticker   = "1447412609165951066"
+	WillNotBeThereSticker = "1447412724484145204"
 
 	// App bound
-	LockInEmoji = "1461532285319774302"
-	GlueEmoji   = "1461548014433865768"
+	madaikanai       = "1459014055414206525" // Placeholder emoji
+	GlueEmoji        = "1461548014433865768"
+	KRMonday         = "1462150426999656743"
+	Kusa             = "1462185263559086223"
+	BaeLock          = "1461532285319774302"
+	IRySLock         = "1462185265610362973"
+	LihengzReallyMad = "1462223003160023121"
+
+	MukaMuka             = "1462185272535154851"
+	RedNousagiMukaMuka   = "1462185268084998461"
+	NimiMukaMuka         = "1462185279552229458"
+	OtomoMukaMuka        = "1462185288188035134"
+	KFPMukaMuka          = "1462185289945583739"
+	WhiteNousagiMukaMuka = "1462185292822741185"
+	JailbirdMukaMuka     = "1462185295184400516"
 
 	PekoPog             = "1458287997815361650"
 	PekoHappy           = "1458289554715840583"
@@ -51,6 +62,8 @@ const (
 	PekoYayTwitch       = "1460000068894457867"
 	PekoCute            = "1460000077190795345"
 	PekoNuma            = "1460000078445019333"
+	peko_angry_3        = "1462222999850844391"
+	pekoangry2          = "1462222998521118772"
 
 	SuiWobble         = "1458287981277216838"
 	SuiSway           = "1458288617985146951"
@@ -167,21 +180,22 @@ const (
 	BaeWink              = "1459003803201310751"
 	BaeWhimsy            = "1459017080132337737"
 
-	FaunaUUUUU  = "1459422819992604776"
-	FaunaCheer  = "1459700929677754533"
-	FaunaCozy   = "1459700931322187940"
-	FaunaCool   = "1459700933670862909"
-	FaunaNuma   = "1459700935407440088"
-	FaunaPeek   = "1459700937261322274"
-	FaunaNod    = "1459700938720940156"
-	FaunaYay    = "1459700940394332385"
-	FaunaWave   = "1459700941740703918"
-	FaunaAngel  = "1459700943346995434"
-	FaunaLaying = "1459700945448472771"
-	FaunaAra    = "1459700946790776977"
-	FaunaAhoy   = "1459700948040421460"
-	FaunaWave2  = "1459700949537783933"
-	FaunaXD     = "1459700951123230974"
+	FaunaUUUUU   = "1459422819992604776"
+	FaunaCheer   = "1459700929677754533"
+	FaunaCozy    = "1459700931322187940"
+	FaunaCool    = "1459700933670862909"
+	FaunaNuma    = "1459700935407440088"
+	FaunaPeek    = "1459700937261322274"
+	FaunaNod     = "1459700938720940156"
+	FaunaYay     = "1459700940394332385"
+	FaunaWave    = "1459700941740703918"
+	FaunaAngel   = "1459700943346995434"
+	FaunaLaying  = "1459700945448472771"
+	FaunaAra     = "1459700946790776977"
+	FaunaAhoy    = "1459700948040421460"
+	FaunaWave2   = "1459700949537783933"
+	FaunaXD      = "1459700951123230974"
+	FaunaAngryYT = "1462222996960841823"
 
 	RaoraLove       = "1460000019489751071"
 	RaoraAhuhe      = "1460000020618154137"
@@ -485,24 +499,26 @@ const (
 	sabaJam      = "1460000693556613346"
 	sabaPatA     = "1460000695578005849"
 
-	KRGetsuyoubi     = "1460000285777723465"
-	KanPeako         = "1460000287501713430"
-	KanadeButtShake2 = "1460000290433405114"
-	KanadeBlessed    = "1460000293931585691"
-	KanadeClap       = "1460000295344930927"
-	KanadeDoro       = "1460000296586707039"
-	KanadeEZ         = "1460000298297983139"
-	KanadeHeh        = "1460000299816190033"
-	KanadeLaugh      = "1460000300831215852"
-	KanadeLonely     = "1460000301993033759"
-	KanadePat        = "1460000303154860269"
-	KanadePunch      = "1460000305348612238"
-	KanadeSmugThink  = "1460000306539659428"
-	KanadeSmugSide   = "1460000307751682324"
-	KanadeYay2       = "1460000309635186843"
-	KanadeVibe       = "1460000314307379259"
-	MemKanadeYay     = "1460000315884572693"
-	MemKanadeSmug    = "1460000317516157070"
+	KRGetsuyoubi      = "1460000285777723465"
+	KanPeako          = "1460000287501713430"
+	KanadeButtShake2  = "1460000290433405114"
+	KanadeBlessed     = "1460000293931585691"
+	KanadeClap        = "1460000295344930927"
+	KanadeDoro        = "1460000296586707039"
+	KanadeEZ          = "1460000298297983139"
+	KanadeHeh         = "1460000299816190033"
+	KanadeLaugh       = "1460000300831215852"
+	KanadeLonely      = "1460000301993033759"
+	KanadePat         = "1460000303154860269"
+	KanadePunch       = "1460000305348612238"
+	KanadeSmugThink   = "1460000306539659428"
+	KanadeSmugSide    = "1460000307751682324"
+	KanadeYay2        = "1460000309635186843"
+	KanadeVibe        = "1460000314307379259"
+	MemKanadeYay      = "1460000315884572693"
+	MemKanadeSmug     = "1460000317516157070"
+	KanadePointLaugh  = "1462185274174865428"
+	KanadePointLaugh2 = "1462185275647332526"
 
 	BijouAPeekSmug       = "1460000390689984605"
 	BijouAnyaSmug        = "1460000392174637087"
@@ -1495,6 +1511,7 @@ const (
 	Hajime        = "1460002510088441916"
 	HajimeGutter  = "1460002511556448340"
 	HajimeHappy   = "1460002514786189353"
+	HajimeHuh     = "1462223001377308783"
 
 	JFTWave         = "1460002516472430682"
 	RadenDoro       = "1460002520649830490"
@@ -1750,8 +1767,8 @@ var (
 	OmgYukiEmojis     = []string{madaikanai}
 	OmgZetaEmojis     = []string{ZetaChibi, ZetaHeart, ZetaMEM_Agent, ZetaHue, ZetaHehe, ZetaMEM_Smug, ZetaMEM_Wow, ZetaNuma, ZetaNumaFast, ZetaPadoruSpinFast, ZetaShades, zetaSmugSmile, zetaSugoi, ZetaYay, ZetaWao, ZetaPatting, ZetaPat2, ZetaPat, ZetaWiggle}
 
-	Placeholders      = []string{madaikanai}
-	LocalTestEmojis1  = []string{"1459399252580237573", "1459399250948653272", "1459399249535041547"}
-	LocalTestEmojis2  = []string{"1459399288676417675", "1459399287568990250", "1459399286470082742"}
-	LocalTestStickers = []string{LocallTestSticker}
+	Placeholders     = []string{madaikanai}
+	KanadeSmugEmojis = []string{KanadePointLaugh, KanadePointLaugh2, KanadeSmugSide, KanadeEZ, KanadePunch, KRGetsuyoubi}
+	MukaMukaEmojis   = []string{RedNousagiMukaMuka, MukaMuka, NimiMukaMuka, OtomoMukaMuka, KFPMukaMuka, WhiteNousagiMukaMuka, JailbirdMukaMuka}
+	AngryEmojis      = []string{ViviAngry, NikotanANGY, FubukiAngy, FaunaAngryYT, pekoangry2, peko_angry_3, LihengzReallyMad, HajimeHuh}
 )

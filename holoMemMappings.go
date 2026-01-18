@@ -5,13 +5,13 @@ import (
 	"regexp"
 )
 
-type OmgMemKVP struct {
+type RegExpEmojiKVP struct {
 	RegexExpr *regexp.Regexp
 	EmojiList [][]string
 }
 
-func newOmgMemKVP(regexExpr string, emojiList [][]string) OmgMemKVP {
-	return OmgMemKVP{
+func newOmgMemKVP(regexExpr string, emojiList [][]string) RegExpEmojiKVP {
+	return RegExpEmojiKVP{
 		RegexExpr: regexp.MustCompile(fmt.Sprintf(OmgMemGenericRegex, regexExpr)),
 		EmojiList: emojiList,
 	}
@@ -20,7 +20,7 @@ func newOmgMemKVP(regexExpr string, emojiList [][]string) OmgMemKVP {
 type RegexMatch struct {
 	name string
 	idx  int
-	KVP  OmgMemKVP
+	KVP  RegExpEmojiKVP
 }
 
 var (
@@ -31,7 +31,7 @@ var (
 	OmgSuiRegexCompiled = regexp.MustCompile(`(?i)\b(omf?g+[-\s]?(sui|suisei|comet))\b`)
 
 	// Mappings - Mem Name: Regex Pattern -> Emoji IDs List
-	OmgMemNameMappings = map[string]OmgMemKVP{
+	OmgMemNameMappings = map[string]RegExpEmojiKVP{
 		"achan":          newOmgMemKVP("achan", [][]string{OmgAchanEmojis}),
 		"akirose":        newOmgMemKVP("akirose(nthal)?", [][]string{OmgAkiroseEmojis}),
 		"ame":            newOmgMemKVP("ame+|amelia|amechan|watson", [][]string{OmgAmeEmojis}),
@@ -130,15 +130,17 @@ var (
 		"gen0":           newOmgMemKVP(`gen[-\s]?0`, [][]string{OmgSoraEmojis, OmgRobocoEmojis, OmgAzkiEmojis, OmgMikoEmojis, OmgSuiEmojis}),
 		"gen1":           newOmgMemKVP(`gen[-\s]?1`, [][]string{OmgAkiroseEmojis, OmgHaachamaEmojis, OmgFubukiEmojis, OmgMatsuriEmojis}),
 		"gen2":           newOmgMemKVP(`gen[-\s]?2`, [][]string{OmgAyameEmojis, OmgChocoEmojis, OmgSubaruEmojis, OmgAquaEmojis, OmgShionEmojis}),
-		"gen3":           newOmgMemKVP(`gen[-\s]?3`, [][]string{OmgPekoEmojis, OmgFlareEmojis, OmgNoelEmojis, OmgMarineEmojis}),
+		"gen3":           newOmgMemKVP(`gen[-\s]?3|sankisei?|3kisei?`, [][]string{OmgPekoEmojis, OmgFlareEmojis, OmgNoelEmojis, OmgMarineEmojis}),
 		"gen4":           newOmgMemKVP(`gen[-\s]?4`, [][]string{OmgWatameEmojis, OmgTowaEmojis, OmgLunaEmojis, OmgKanataEmojis, OmgCocoEmojis}),
 		"gen5":           newOmgMemKVP(`gen[-\s]?5`, [][]string{OmgLamyEmojis, OmgNeneEmojis, OmgBotanEmojis, OmgPolkaEmojis}),
 		"holox":          newOmgMemKVP(`holox`, [][]string{OmgLaplusEmojis, OmgLuiEmojis, OmgKoyoriEmojis, OmgIrohaEmojis, OmgChloeEmojis}),
 		"holoid":         newOmgMemKVP(`holo[-\s]?id`, [][]string{OmgRisuEmojis, OmgMoonaEmojis, OmgIofiEmojis, OmgOllieEmojis, OmgAnyaEmojis, OmgReineEmojis, OmgZetaEmojis, OmgKaelaEmojis, OmgKoboEmojis}),
 		"stupidnonsense": newOmgMemKVP("not marine|(pizza|green|blue|pink|yellow) [wl]amy", [][]string{Placeholders}),
-		"glue":           newOmgMemKVP("glue", [][]string{[]string{GlueEmoji}}),
-		"faunauuuuu":     OmgMemKVP{RegexExpr: uuuuuCompiled, EmojiList: [][]string{[]string{FaunaUUUUU}}},
-		"lockin":         OmgMemKVP{RegexExpr: LockInRegexCompiled, EmojiList: [][]string{[]string{LockInEmoji}}}}
+		"glue":           newOmgMemKVP("glue", [][]string{{GlueEmoji}}),
+		"faunauuuuu":     RegExpEmojiKVP{RegexExpr: uuuuuCompiled, EmojiList: [][]string{{FaunaUUUUU}}},
+		"lockin":         RegExpEmojiKVP{RegexExpr: LockInRegexCompiled, EmojiList: [][]string{{BaeLock}}}}
+
+	// Todo: parasocial ships
 
 	// Local test
 	//"test1": newOmgMemKVP("autofister|ccgg", [][]string{[]string{"1461527655357616148"}, []string{"1461527653428494496"}}),
@@ -147,4 +149,10 @@ var (
 	//"test4": newOmgMemKVP("mocofuwa", [][]string{[]string{"1461527665709289483"}, []string{"1461527663066877995"}}),
 	//"test5": OmgMemKVP{RegexExpr: uuuuuCompiled, EmojiList: [][]string{[]string{"1461527680297074770"}}},
 	//"test6": OmgMemKVP{RegexExpr: LockInRegexCompiled, EmojiList: [][]string{[]string{"1461527681869938758"}}}}
+
+	// Mappings for StickerIds and emojis to react to it with
+	StickerIdMappings = map[string]RegExpEmojiKVP{
+		"getsuyoubi":     RegExpEmojiKVP{RegexExpr: regexp.MustCompile(`^1363559590603657538$`), EmojiList: [][]string{KanadeSmugEmojis, MukaMukaEmojis}},
+		"lockin":         RegExpEmojiKVP{RegexExpr: regexp.MustCompile(`^(1447975441183936736|1447412433273491518)$`), EmojiList: [][]string{{BaeLock, IRySLock}}},
+		"willnotbethere": RegExpEmojiKVP{RegexExpr: regexp.MustCompile(`^(1447412609165951066|1447412724484145204)$`), EmojiList: [][]string{}}}
 )

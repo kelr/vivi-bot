@@ -82,7 +82,7 @@ func reactToMessageWithSticker(s *discordgo.Session, m *discordgo.MessageCreate)
 	}
 	// Send Bancho Lock In sticker when someone mentions "lock in"
 	if LockInRegexCompiled.MatchString(m.Content) {
-		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{BanchoLockInSticker}})
+		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{BanchouLockInSticker}})
 	}
 }
 
@@ -96,13 +96,24 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Store matched "omg mem" from the message with their index
 	matches := []RegexMatch{}
 	matchedNames := map[string]bool{}
+	matchedStickers := []RegexMatch{}
 
 	// Dynamically loop thru OmgMemNameMappings and look for matches within the text and store an indexed list
-	for name, holoMemKVP := range OmgMemNameMappings {
-		regexMatch := holoMemKVP.RegexExpr.FindStringIndex(m.Content)
-		if regexMatch != nil {
-			matches = append(matches, RegexMatch{name: name, idx: regexMatch[0], KVP: holoMemKVP})
-			matchedNames[name] = true
+	if len(m.StickerItems) > 0 {
+		for name, StickerIdKVP := range StickerIdMappings {
+			regexMatch := StickerIdKVP.RegexExpr.MatchString(m.StickerItems[0].ID)
+			if regexMatch {
+				matchedStickers = append(matchedStickers, RegexMatch{name: name, KVP: StickerIdKVP})
+			}
+		}
+	} else {
+		for name, holoMemKVP := range OmgMemNameMappings {
+			regexMatch := holoMemKVP.RegexExpr.FindStringIndex(m.Content)
+			if regexMatch != nil {
+				matches = append(matches, RegexMatch{name: name, idx: regexMatch[0], KVP: holoMemKVP})
+				matchedNames[name] = true
+			}
+
 		}
 	}
 
@@ -127,6 +138,19 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 				s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("<@%s> **WHAT ABOUT MOCOCOEH!?**", m.Author.ID))
 				s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{MococoHOEHSticker}})
 			}
+		default:
+			for _, emojis := range match.KVP.EmojiList {
+				s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(emojis))
+			}
+		}
+	}
+
+	// Handle stickers
+	for _, match := range matchedStickers {
+		switch match.name {
+		case "willnotbethere":
+			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(AngryEmojis))
+			s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{Content: fmt.Sprintf("<@%s>", m.Author.ID), StickerIDs: []string{BanchouLockInSticker}})
 		default:
 			for _, emojis := range match.KVP.EmojiList {
 				s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(emojis))
