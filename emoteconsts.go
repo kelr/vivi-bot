@@ -1,10 +1,20 @@
 package main
 
 const (
-	/// External Server
-	GetsuyoubiSticker = "1363559590603657538"
+	// Tenor GIFS
+	FirstTakeSui   = `https://tenor.com/view/%E6%98%9F%E8%A1%97%E3%81%99%E3%81%84%E3%81%9B%E3%81%84-%E3%83%9B%E3%83%AD%E3%83%A9%E3%82%A4%E3%83%96-hoshimachi-suisei-suisei-hololive-gif-27501115`
+	SuiKabedon     = `https://giphy.com/gifs/kawaii-hoshimachi-suisei-suichan-0DXZTnKTKc7I4hIfKp`
+	IrohaShotgun   = `https://tenor.com/view/iroha-%E9%A2%A8%E7%9C%9F%E3%81%84%E3%82%8D%E3%81%AF-%E3%83%9B%E3%83%AD%E3%83%A9%E3%82%A4%E3%83%96-kazama-iroha-hololive-gif-13931810556261403369`
+	LizRokuNana    = `https://tenor.com/view/67-6-7-erb-elizabeth-rose-bloodflame-hololive-gif-16348656096651909099`
+	KroniiRokuNana = `https://tenor.com/view/67-67-meme-ouro-kronii-kronii-hololive-gif-10151644264710012355`
+	BibooRokuNana  = `https://tenor.com/view/biboo-67-6-7-biboo-hololive-hololive-english-gif-12839497911090238075`
+	BibooRokuNana2 = `https://tenor.com/view/6-7-biboo-koseki-bijou-hololive-hololive-english-gif-17937080463012995711`
+	BaeRokuNana    = `https://tenor.com/view/67-baelz-6-7-hololive-hololive-english-holoen-gif-14610267376502839200`
+	GigiRokuNana   = `https://tenor.com/view/gigi-murin-6-7-67-gigi-hololive-hololive-english-gif-8796322333734562045`
+	RaoraRokuNana  = `https://tenor.com/view/raora-panthera-raora-6-7-67-raora-hololive-english-gif-7048999070733287972`
+	RissaRokuNana  = `https://tenor.com/view/nerissa-67-6-7-nerissa-ravencroft-hololive-english-holoadvent-gif-2255292092634053307`
 
-	/// Guild bound
+	// Guild bound
 	BanchouLockInSticker  = "1447975441183936736"
 	ViviSusLeftSticker    = "1456174507059314861"
 	ViviSusCenterSticker  = "1457213252839932067"
@@ -14,7 +24,7 @@ const (
 	MightBeThereSticker   = "1447412609165951066"
 	WillNotBeThereSticker = "1447412724484145204"
 
-	// App bound
+	//App bound
 	madaikanai       = "1459014055414206525" // Placeholder emoji
 	GlueEmoji        = "1461548014433865768"
 	KRMonday         = "1462150426999656743"
@@ -22,6 +32,13 @@ const (
 	BaeLock          = "1461532285319774302"
 	IRySLock         = "1462185265610362973"
 	LihengzReallyMad = "1462223003160023121"
+	Zaiko            = "1462972633531289671"
+	TicketMaster     = "1462972634856947795"
+	EPlus            = "1462972636081553612"
+	ltike            = "1462982481744494696"
+	JDONMYSOUL       = "1462972637520068739"
+	JDON             = "1462972639437000767"
+	LihengzSus       = "1462972642247315456"
 
 	MukaMuka             = "1462185272535154851"
 	RedNousagiMukaMuka   = "1462185268084998461"
@@ -157,6 +174,7 @@ const (
 	MococoPat         = "1460041804979372062"
 	MococoBauBau      = "1460041806245921002"
 	MococoYay         = "1460041796334653482"
+	Haeh              = "1462570995088097290"
 
 	Bau1 = "1458991297791791250"
 	Bau2 = "1458991295585583146"
@@ -1065,7 +1083,7 @@ const (
 	FlareWoah       = "1460010029515276472"
 	FlareYayYay     = "1460010031368900818"
 
-	// Kanata
+	Kanata
 	PPCooler     = "1460001487722905791"
 	PPExcited    = "1460001489488711690"
 	PPClap       = "1460001495700476040"
@@ -1675,6 +1693,17 @@ const (
 	RirikaSmug          = "1460039294097031343"
 	RirikaSmug2         = "1460039296001118363"
 	RirikaSpin          = "1460039298727284901"
+
+	RushiaBlink        = "1462570973047033890"
+	RushiaFukireta     = "1462570975336992819"
+	RushiaMad          = "1462570976700141671"
+	RushiaPhone        = "1462570978704888011"
+	RushiaSway         = "1462570981154492440"
+	RushiaTakoBounce   = "1462570982848860282"
+	Gen_3_Rushia       = "1462570985579352134"
+	Gen_3_Rushia_happy = "1462570987634692157"
+	zani_rushiaangry   = "1462570989136117861"
+	Gen_3_team_Rushia  = "1462570993523495003"
 )
 
 var (
@@ -1752,6 +1781,7 @@ var (
 	OmgRirikaEmojis   = []string{RirikaDayo, RirikaFukkireta, RirikaClap, RirikaButtSway, RirikaBleh, RirikaBikkuriMember, RirikaDedA, RirikaGalaxy, RirikaGangimari, RirikaHeartEyes, RirikaHeartMember, RirikaMemReGLOSS, RirikaKawaii, RirikaHug, RirikaMemberCheer, RirikaNodFast, RirikaSmile, RirikaYay, RirikaYawn, Ririkat, Ririkoob, RirikaSmug, RirikaSmug2, RirikaSpin}
 	OmgRisuEmojis     = []string{AyundaWow, AyundaHeadpat, Gangirisu, PerisuLickPero, RisuAhoy, RisuBean, RisuDMC, RisuDance, RisuHyperHalu, RisuNuma, RisuNod, RisuPadoruSpinFast, RisuPop, RisuShades, RisuWave, RisuWiggle, Risuahoyslide, RisuYaay}
 	OmgRobocoEmojis   = []string{rbcAbsolutePain, rbcBlush, rbcAmazed, rbcHiSpec, rbcHeartwink, rbcNod, rbcPeeking, rbcPlushSpin, rbcRealize, rbcSmugHBD, rbcSmugshh, rbcSway, rbcwoop, rbcsmug2, rbcnipah, rbcYay, rbcXD}
+	OmgRushiaEmojis   = []string{RushiaBlink, RushiaFukireta, RushiaMad, RushiaPhone, RushiaSway, RushiaTakoBounce, Gen_3_Rushia, Gen_3_Rushia_happy, zani_rushiaangry, Gen_3_team_Rushia}
 	OmgSabaEmojis     = []string{CheerSaba1, CoolSaba, PogSaba, Sabacool, Saba_Smug, Saba_Blush, Sabapat, Sablep, Smugsaba, sabaNodders, sabapop, sabapog, sabashades, saspin_chas, sabaAngy, SabaTroubled, sabaExcited, sabaJam, sabaPatA}
 	OmgSanaEmojis     = []string{SanaAfk, SanaPeekA, SanaPog, SanaWink, SanaWow, AniSanaSpeenFast, SanaClap, SanaCool, SanaNod, SanaNuma, SanaYipee}
 	OmgSayakaEmojis   = []string{madaikanai}
@@ -1771,4 +1801,8 @@ var (
 	KanadeSmugEmojis = []string{KanadePointLaugh, KanadePointLaugh2, KanadeSmugSide, KanadeEZ, KanadePunch, KRGetsuyoubi}
 	MukaMukaEmojis   = []string{RedNousagiMukaMuka, MukaMuka, NimiMukaMuka, OtomoMukaMuka, KFPMukaMuka, WhiteNousagiMukaMuka, JailbirdMukaMuka}
 	AngryEmojis      = []string{ViviAngry, NikotanANGY, FubukiAngy, FaunaAngryYT, pekoangry2, peko_angry_3, LihengzReallyMad, HajimeHuh}
+
+	// Tenor links
+	IHateMyselfForThisForgiveMe = []string{LizRokuNana, KroniiRokuNana, BibooRokuNana, BibooRokuNana2, BaeRokuNana, GigiRokuNana, RaoraRokuNana, RissaRokuNana}
+	SuiGifs                     = []string{FirstTakeSui, SuiKabedon}
 )

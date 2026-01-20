@@ -1,15 +1,12 @@
 package main
 
 // const (
-// 	/// External Server
-// 	GetsuyoubiSticker = "1363559590603657538"
-
 // 	/// Guild bound
-// 	BanchouLockInSticker  = "1447975441183936736"
-// 	ViviSusLeftSticker    = "1456174507059314861"
-// 	ViviSusCenterSticker  = "1457213252839932067"
-// 	ViviSusRightSticker   = "1457228017590861834"
-// 	MococoHOEHSticker     = "1458986580147568650"
+// 	BanchouLockInSticker  = "1406295250871386112"
+// 	ViviSusLeftSticker    = "1420380133780488312"
+// 	ViviSusCenterSticker  = "1420380133780488312"
+// 	ViviSusRightSticker   = "1420380133780488312"
+// 	MococoHOEHSticker     = "1462523001957384426"
 // 	WillBeThereSticker    = "1447412433273491518"
 // 	MightBeThereSticker   = "1447412609165951066"
 // 	WillNotBeThereSticker = "1447412724484145204"
@@ -1580,6 +1577,25 @@ package main
 // 	SubaDuckSpeed3                   = "1462234321866854583"
 // 	SubaDuckSpeed1                   = "1462234323746029690"
 // 	SubaDuckSpeed2                   = "1462234325503180908"
+
+// 	RushiaBlink        = "1462572367350988892"
+// 	RushiaFukireta     = "1462572374879768646"
+// 	RushiaMad          = "1462572376884641925"
+// 	RushiaPhone        = "1462572379103564031"
+// 	RushiaSway         = "1462572381842313391"
+// 	RushiaTakoBounce   = "1462572384463880325"
+// 	Gen_3_Rushia       = "1462572386682404974"
+// 	Gen_3_Rushia_happy = "1462572388284760159"
+// 	zani_rushiaangry   = "1462572391195742461"
+// 	Gen_3_team_Rushia  = "1462572392873459712"
+// 	Haeh               = "1462572395050176654"
+// 	LihengzSus         = "1462967364416045120"
+// 	Zaiko              = "1462967355285180619"
+// 	TicketMaster       = "1462967356719370302"
+// 	EPlus              = "1462967358137303298"
+// 	JDONMYSOUL         = "1462967360066420798"
+// 	JDON               = "1462967362243530793"
+// 	ltike              = "1462982632613744724"
 // )
 
 // var (
@@ -1657,6 +1673,7 @@ package main
 // 	OmgRirikaEmojis   = []string{RirikaDayo, RirikaFukkireta, RirikaClap, RirikaButtSway, RirikaBleh, RirikaBikkuriMember, RirikaDedA, RirikaGalaxy, RirikaGangimari, RirikaHeartEyes, RirikaHeartMember, RirikaMemReGLOSS, RirikaKawaii, RirikaHug, RirikaMemberCheer, RirikaNodFast, RirikaSmile, RirikaYay, RirikaYawn, Ririkat, Ririkoob, RirikaSmug, RirikaSmug2, RirikaSpin}
 // 	OmgRisuEmojis     = []string{AyundaWow, AyundaHeadpat, Gangirisu, PerisuLickPero, RisuAhoy, RisuBean, RisuDMC, RisuDance, RisuHyperHalu, RisuNuma, RisuNod, RisuPadoruSpinFast, RisuPop, RisuShades, RisuWave, RisuWiggle, Risuahoyslide, RisuYaay}
 // 	OmgRobocoEmojis   = []string{rbcAbsolutePain, rbcBlush, rbcAmazed, rbcHiSpec, rbcHeartwink, rbcNod, rbcPeeking, rbcPlushSpin, rbcRealize, rbcSmugHBD, rbcSmugshh, rbcSway, rbcwoop, rbcsmug2, rbcnipah, rbcYay, rbcXD}
+// 	OmgRushiaEmojis   = []string{RushiaBlink, RushiaFukireta, RushiaMad, RushiaPhone, RushiaSway, RushiaTakoBounce, Gen_3_Rushia, Gen_3_Rushia_happy, zani_rushiaangry, Gen_3_team_Rushia}
 // 	OmgSabaEmojis     = []string{CheerSaba1, CoolSaba, PogSaba, Sabacool, Saba_Smug, Saba_Blush, Sabapat, Sablep, Smugsaba, sabaNodders, sabapop, sabapog, sabashades, saspin_chas, sabaAngy, SabaTroubled, sabaExcited, sabaJam, sabaPatA}
 // 	OmgSanaEmojis     = []string{SanaAfk, SanaPeekA, SanaPog, SanaWink, SanaWow, AniSanaSpeenFast, SanaClap, SanaCool, SanaNod, SanaNuma, SanaYipee}
 // 	OmgSayakaEmojis   = []string{MadaIkanai}
@@ -1672,8 +1689,10 @@ package main
 // 	OmgYukiEmojis     = []string{MadaIkanai}
 // 	OmgZetaEmojis     = []string{ZetaChibi, ZetaHeart, ZetaMEM_Agent, ZetaHue, ZetaHehe, ZetaMEM_Smug, ZetaMEM_Wow, ZetaNuma, ZetaNumaFast, ZetaPadoruSpinFast, ZetaShades, zetaSmugSmile, zetaSugoi, ZetaYay, ZetaWao, ZetaPatting, ZetaPat2, ZetaPat, ZetaWiggle}
 
-// 	Placeholders     = []string{MadaIkanai}
-// 	KanadeSmugEmojis = []string{KanadePointLaugh, KanadePointLaugh2, KanadeSmugSide, KanadeEZ, KanadePunch, KRGetsuyoubi}
-// 	MukaMukaEmojis   = []string{RedNousagiMukaMuka, MukaMuka, NimiMukaMuka, OtomoMukaMuka, KFPMukaMuka, WhiteNousagiMukaMuka, JailbirdMukaMuka}
-// 	AngryEmojis      = []string{ViviAngry, NikotanANGY, FubukiAngy, FaunaAngryYT, pekoangry2, peko_angry_3, LihengzReallyMad, HajimeHuh}
+// 	Placeholders                = []string{MadaIkanai}
+// 	KanadeSmugEmojis            = []string{KanadePointLaugh, KanadePointLaugh2, KanadeSmugSide, KanadeEZ, KanadePunch, KRGetsuyoubi}
+// 	MukaMukaEmojis              = []string{RedNousagiMukaMuka, MukaMuka, NimiMukaMuka, OtomoMukaMuka, KFPMukaMuka, WhiteNousagiMukaMuka, JailbirdMukaMuka}
+// 	AngryEmojis                 = []string{ViviAngry, NikotanANGY, FubukiAngy, FaunaAngryYT, pekoangry2, peko_angry_3, LihengzReallyMad, HajimeHuh}
+// 	IHateMyselfForThisForgiveMe = []string{LizRokuNana, KroniiRokuNana, BibooRokuNana, BibooRokuNana2, BaeRokuNana, GigiRokuNana, RaoraRokuNana, RissaRokuNana}
+// 	SuiGifs                     = []string{FirstTakeSui, SuiKabedon}
 // )
