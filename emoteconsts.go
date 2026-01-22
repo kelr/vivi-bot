@@ -14,6 +14,24 @@ const (
 	RaoraRokuNana  = `https://tenor.com/view/raora-panthera-raora-6-7-67-raora-hololive-english-gif-7048999070733287972`
 	RissaRokuNana  = `https://tenor.com/view/nerissa-67-6-7-nerissa-ravencroft-hololive-english-holoadvent-gif-2255292092634053307`
 
+	// Discord CDN URLS
+	Mint_GET_PREGNANT      = `https://cdn.discordapp.com/attachments/1463356157723672629/1463356327853035551/Mint_GET_PREGNANT.mp4`
+	Mococar                = `https://cdn.discordapp.com/attachments/1463356157723672629/1463356310010593293/mococar.mp4`
+	pekora_gonnahityou     = `https://cdn.discordapp.com/attachments/1463356157723672629/1463364240575434752/pekora_gonnahityou.mp4`
+	nimi_youfreak          = `https://cdn.discordapp.com/attachments/1463356157723672629/1463365225733685378/nimi_youfreak.mp4`
+	Bakey_BauBau           = `https://cdn.discordapp.com/attachments/1463356157723672629/1463364252835381258/Bakey_BauBau.mp4`
+	high_res_baubau        = `https://cdn.discordapp.com/attachments/1463356157723672629/1463366354647122122/high_res_baubau.mp4`
+	BauBauFast             = `https://cdn.discordapp.com/attachments/1463356157723672629/1463699646994976820/BauBau.mp4`
+	HOEH                   = `https://cdn.discordapp.com/attachments/1463356157723672629/1463365758170955839/HOEH.mp4`
+	Latinas                = `https://cdn.discordapp.com/attachments/1463356157723672629/1463365960806437049/Latinas.mp4`
+	pekora_shaddupbitch    = `https://cdn.discordapp.com/attachments/1463356157723672629/1463366067534561354/pekora_shaddupbitch.mp4`
+	manilovefauna          = `https://cdn.discordapp.com/attachments/1463356157723672629/1463366891224436895/manilovefauna.mp4`
+	WizardOjichanAmaterasu = `https://cdn.discordapp.com/attachments/1463356157723672629/1463386617069961216/WizardOjichanAmaterasu.mp4`
+	WizardOjichanMaware    = `https://cdn.discordapp.com/attachments/1463356157723672629/1463386616533094433/WizardOjichanMaware.mp4`
+	WizardOjichanBirds     = `https://cdn.discordapp.com/attachments/1463356157723672629/1463386617438802120/WizardOjichanBirds.mp4`
+	ietaiga                = `https://cdn.discordapp.com/attachments/1463356157723672629/1463369509665636473/ietaiga.mp4`
+	BaeYEET                = `https://cdn.discordapp.com/attachments/1463356157723672629/1463689980042805483/BaeYEET.mp4`
+
 	// Guild bound
 	BanchouLockInSticker  = "1447975441183936736"
 	ViviSusLeftSticker    = "1456174507059314861"

@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"math/rand"
 	"os"
@@ -80,7 +79,7 @@ func reactToMessageWithSticker(s *discordgo.Session, m *discordgo.MessageCreate)
 	// Sends Vivi sticker when the bot is mentioned
 	if strings.Contains(m.Content, *BotId) {
 		if rand.Intn(10) == 0 {
-			sendEmbedFile(s, m, fmt.Sprintf("<@%s>", m.Author.ID), `images\pekora_gonnahityou.mp4`)
+			reactToUserMessage(s, m, pekora_gonnahityou)
 		} else {
 			s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{selectRandom(ViviSusStickers)}})
 		}
@@ -92,7 +91,7 @@ func reactToMessageWithFile(s *discordgo.Session, m *discordgo.MessageCreate) {
 	for _, FileEmbedKVP := range FileEmbedMappings {
 		regexMatch := FileEmbedKVP.RegexExpr.MatchString(m.Content)
 		if regexMatch {
-			sendEmbedFile(s, m, fmt.Sprintf("<@%s>", m.Author.ID), selectRandom(FileEmbedKVP.EmojiList[0]))
+			reactToUserMessage(s, m, selectRandom(FileEmbedKVP.EmojiList[0]))
 		}
 	}
 }
@@ -140,7 +139,7 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 		switch match.name {
 		// Special case handling
 		case "fuwamoco":
-			sendEmbedFile(s, m, fmt.Sprintf("<@%s>", m.Author.ID), `images\high_res_baubau.mp4`)
+			reactToUserMessage(s, m, selectRandom([]string{high_res_baubau, BauBauFast}))
 			fwmcPair := OmgFuwaMocoEmojis[rand.Intn(len(OmgFuwaMocoEmojis))]
 			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+fwmcPair[0])
 			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+fwmcPair[1])
@@ -149,15 +148,14 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 		case "fuwawa":
 			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(match.KVP.EmojiList[0]))
 			if !matchedNames["mococo"] && !matchedNames["fuwamoco"] && !matchedNames["mocofuwa"] && !matchedNames["advent"] {
-				s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("<@%s> **WHAT ABOUT MOCOCOEH!?**", m.Author.ID))
-				s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{MococoHOEHSticker}})
+				reactToUserMessage(s, m, "**WHAT ABOUT MOCOCOEH!?**", MococoHOEHSticker)
 			}
 		case "lockin":
 			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(match.KVP.EmojiList[0]))
-			s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{BanchouLockInSticker}})
+			reactToUserMessage(s, m, "**LOCK IN**", BanchouLockInSticker)
 		case "rokunana":
 			if rand.Intn(4) == 0 {
-				s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{Content: selectRandom(IHateMyselfForThisForgiveMe)})
+				reactToUserMessage(s, m, selectRandom(IHateMyselfForThisForgiveMe))
 			} else {
 				s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+LihengzSus)
 			}
@@ -174,10 +172,9 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 		case "willnotbethere":
 			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(AngryEmojis))
 			if rand.Intn(3) == 0 {
-				s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{Content: fmt.Sprintf(`<@%s> **LOCK IN**`, m.Author.ID)})
-				s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{Content: IrohaShotgun})
+				reactToUserMessage(s, m, IrohaShotgun)
 			} else {
-				s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{Content: fmt.Sprintf(`<@%s> **LOCK IN**`, m.Author.ID), StickerIDs: []string{"1462523001957384426"}})
+				reactToUserMessage(s, m, `**LOCK IN**`, BanchouLockInSticker)
 			}
 		default:
 			for _, emojis := range match.KVP.EmojiList {
@@ -192,34 +189,18 @@ func selectRandom(slice []string) string {
 	return slice[rand.Intn(len(slice))]
 }
 
-func sendEmbedURL(s *discordgo.Session, m *discordgo.MessageCreate, message string, embedURL string) {
+// Sends a reply message to the user
+func reactToUserMessage(s *discordgo.Session, m *discordgo.MessageCreate, message string, stickers ...string) {
 	s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
 		Content: message,
-		Embeds: []*discordgo.MessageEmbed{
-			{
-				Image: &discordgo.MessageEmbedImage{
-					URL: embedURL,
-				},
-			},
+		Reference: &discordgo.MessageReference{
+			MessageID: m.ID,
+			ChannelID: m.ChannelID,
+			GuildID:   m.GuildID,
 		},
-	})
-}
-
-func sendEmbedFile(s *discordgo.Session, m *discordgo.MessageCreate, message string, embedFilePath string) {
-	file, err := os.Open(embedFilePath)
-	if err != nil {
-		log.Println("Error opening file:", err)
-		return
-	}
-	defer file.Close()
-
-	s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
-		Content: message,
-		Files: []*discordgo.File{
-			{
-				Name:   embedFilePath,
-				Reader: file,
-			},
+		AllowedMentions: &discordgo.MessageAllowedMentions{
+			RepliedUser: false,
 		},
+		StickerIDs: stickers,
 	})
 }
