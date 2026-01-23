@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"math/rand"
 	"os"
@@ -68,6 +67,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Message handlers
 	reactToMessageWithSticker(s, m)
 	reactToMessageWithEmoji(s, m)
+	reactToMessageWithFile(s, m)
 
 	if m.Content == "!test" {
 		s.ChannelMessageSend(m.ChannelID, "test")
@@ -78,11 +78,21 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 func reactToMessageWithSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Sends Vivi sticker when the bot is mentioned
 	if strings.Contains(m.Content, *BotId) {
-		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{selectRandom(ViviSusStickers)}})
+		if rand.Intn(10) == 0 {
+			reactToUserMessage(s, m, pekora_gonnahityou)
+		} else {
+			s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{selectRandom(ViviSusStickers)}})
+		}
 	}
-	// Send Bancho Lock In sticker when someone mentions "lock in"
-	if LockInRegexCompiled.MatchString(m.Content) {
-		s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{BanchoLockInSticker}})
+}
+
+// Listens to messages and sends a file when a match is detected
+func reactToMessageWithFile(s *discordgo.Session, m *discordgo.MessageCreate) {
+	for _, FileEmbedKVP := range FileEmbedMappings {
+		regexMatch := FileEmbedKVP.RegexExpr.MatchString(m.Content)
+		if regexMatch {
+			reactToUserMessage(s, m, selectRandom(FileEmbedKVP.EmojiList[0]))
+		}
 	}
 }
 
@@ -91,18 +101,31 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Sui first no matter what because we are not a cult
 	if OmgSuiRegexCompiled.MatchString(m.Content) {
 		s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(OmgSuiEmojis))
+		if rand.Intn(5) == 0 {
+			s.ChannelMessageSend(m.ChannelID, selectRandom(SuiGifs))
+		}
 	}
 
 	// Store matched "omg mem" from the message with their index
 	matches := []RegexMatch{}
 	matchedNames := map[string]bool{}
+	matchedStickers := []RegexMatch{}
 
 	// Dynamically loop thru OmgMemNameMappings and look for matches within the text and store an indexed list
-	for name, holoMemKVP := range OmgMemNameMappings {
-		regexMatch := holoMemKVP.RegexExpr.FindStringIndex(m.Content)
-		if regexMatch != nil {
-			matches = append(matches, RegexMatch{name: name, idx: regexMatch[0], KVP: holoMemKVP})
-			matchedNames[name] = true
+	if len(m.StickerItems) > 0 {
+		for name, StickerIdKVP := range StickerIdMappings {
+			regexMatch := StickerIdKVP.RegexExpr.MatchString(m.StickerItems[0].ID)
+			if regexMatch {
+				matchedStickers = append(matchedStickers, RegexMatch{name: name, KVP: StickerIdKVP})
+			}
+		}
+	} else {
+		for name, holoMemKVP := range OmgMemNameMappings {
+			regexMatch := holoMemKVP.RegexExpr.FindStringIndex(m.Content)
+			if regexMatch != nil {
+				matches = append(matches, RegexMatch{name: name, idx: regexMatch[0], KVP: holoMemKVP})
+				matchedNames[name] = true
+			}
 		}
 	}
 
@@ -116,6 +139,7 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 		switch match.name {
 		// Special case handling
 		case "fuwamoco":
+			reactToUserMessage(s, m, selectRandom([]string{high_res_baubau, BauBauFast}))
 			fwmcPair := OmgFuwaMocoEmojis[rand.Intn(len(OmgFuwaMocoEmojis))]
 			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+fwmcPair[0])
 			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+fwmcPair[1])
@@ -124,8 +148,33 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 		case "fuwawa":
 			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(match.KVP.EmojiList[0]))
 			if !matchedNames["mococo"] && !matchedNames["fuwamoco"] && !matchedNames["mocofuwa"] && !matchedNames["advent"] {
-				s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("<@%s> **WHAT ABOUT MOCOCOEH!?**", m.Author.ID))
-				s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{MococoHOEHSticker}})
+				reactToUserMessage(s, m, "**WHAT ABOUT MOCOCOEH!?**", MococoHOEHSticker)
+			}
+		case "lockin":
+			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(match.KVP.EmojiList[0]))
+			reactToUserMessage(s, m, "**LOCK IN**", BanchouLockInSticker)
+		case "rokunana":
+			if rand.Intn(4) == 0 {
+				reactToUserMessage(s, m, selectRandom(IHateMyselfForThisForgiveMe))
+			} else {
+				s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+LihengzSus)
+			}
+		default:
+			for _, emojis := range match.KVP.EmojiList {
+				s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(emojis))
+			}
+		}
+	}
+
+	// Handle stickers
+	for _, match := range matchedStickers {
+		switch match.name {
+		case "willnotbethere":
+			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(AngryEmojis))
+			if rand.Intn(3) == 0 {
+				reactToUserMessage(s, m, IrohaShotgun)
+			} else {
+				reactToUserMessage(s, m, `**LOCK IN**`, BanchouLockInSticker)
 			}
 		default:
 			for _, emojis := range match.KVP.EmojiList {
@@ -138,4 +187,20 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 // Randomly selects an element from a slice of strings
 func selectRandom(slice []string) string {
 	return slice[rand.Intn(len(slice))]
+}
+
+// Sends a reply message to the user
+func reactToUserMessage(s *discordgo.Session, m *discordgo.MessageCreate, message string, stickers ...string) {
+	s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{
+		Content: message,
+		Reference: &discordgo.MessageReference{
+			MessageID: m.ID,
+			ChannelID: m.ChannelID,
+			GuildID:   m.GuildID,
+		},
+		AllowedMentions: &discordgo.MessageAllowedMentions{
+			RepliedUser: false,
+		},
+		StickerIDs: stickers,
+	})
 }
