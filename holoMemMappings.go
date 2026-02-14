@@ -96,7 +96,7 @@ var (
 		"mumei":      newOmgMemKVP("mumei|moom(ers)?|owl", [][]string{OmgMumeiEmojis}),
 		"nene":       newOmgMemKVP(`(super[-\s]?)?nene(chi)?`, [][]string{OmgNeneEmojis}),
 		"nerissa":    newOmgMemKVP(`(ne)?rissa|wet\s?cat`, [][]string{OmgNerissaEmojis}),
-		"niko":       newOmgMemKVP("niko(-?tan)|koganei", [][]string{OmgNikoEmojis}),
+		"niko":       newOmgMemKVP("niko(-?tan)?|koganei", [][]string{OmgNikoEmojis}),
 		"nimi":       newOmgMemKVP("nimi|tapir", [][]string{OmgNimiEmojis}),
 		"nodoka":     newOmgMemKVP("nodoka", [][]string{OmgNodokaEmojis}),
 		"noel":       newOmgMemKVP("noel", [][]string{OmgNoelEmojis}),
@@ -104,7 +104,7 @@ var (
 		"ollie":      newOmgMemKVP("ollie", [][]string{OmgOllieEmojis}),
 		"pekora":     newOmgMemKVP("pe[kg]o(ra)?", [][]string{OmgPekoEmojis}),
 		"polka":      newOmgMemKVP("polka|(oma|pol)pol|omarun|zachou|polulu", [][]string{OmgPolkaEmojis}),
-		"raden":      newOmgMemKVP("raden|juufuutei", [][]string{OmgReineEmojis}),
+		"raden":      newOmgMemKVP("raden|juufuutei", [][]string{OmgRadenEmojis}),
 		"raora":      newOmgMemKVP("raora|rao", [][]string{OmgRaoraEmojis}),
 		"reine":      newOmgMemKVP("reine|pavolia", [][]string{OmgReineEmojis}),
 		"riona":      newOmgMemKVP("riona|isaki", [][]string{OmgRionaEmojis}),
@@ -126,6 +126,7 @@ var (
 		"yuki":       newOmgMemKVP("yuki|kazeshiro", [][]string{OmgYukiEmojis}),
 		"zeta":       newOmgMemKVP("zeta|vestia", [][]string{OmgZetaEmojis}),
 
+		"splashbros":       newOmgMemKVP(`splash[-\s]?bros`, [][]string{OmgGGEmojis, OmgOkayuEmojis}),
 		"bloodraven":       newOmgMemKVP("bloodraven", [][]string{OmgLizEmojis, OmgNerissaEmojis}),
 		"novelflame":       newOmgMemKVP("novelflame", [][]string{OmgLizEmojis, OmgShioriEmojis}),
 		"amesame":          newOmgMemKVP("amesame", [][]string{OmgGuraEmojis, OmgAmeEmojis}),
@@ -183,7 +184,7 @@ var (
 		"hoeh":           newPhraseKVP(`hoeh`, [][]string{{MococoHOEH, MococoHOEH2, MococoHOEH3}}),
 		"jdon":           newPhraseKVP(`jdon|jdon\s?my\s?soul`, [][]string{{JDONMYSOUL}, {JDON}}),
 		"zaiko":          newPhraseKVP(`zaiko`, [][]string{{Zaiko}}),
-		"eplus":          newPhraseKVP(`eplus|e+`, [][]string{{EPlus}}),
+		"eplus":          newPhraseKVP(`eplus`, [][]string{{EPlus}}),
 		"ticketmaster":   newPhraseKVP(`ticketmaster`, [][]string{{TicketMaster}}),
 		"ltike":          newPhraseKVP(`ltike`, [][]string{{ltike}}),
 		"zenloss":        newPhraseKVP(`zenloss`, [][]string{{Zaiko}, {EPlus}, {TicketMaster}, {ltike}}),
@@ -192,15 +193,19 @@ var (
 
 	// Mappings for phrases to check for and local files to react with
 	FileEmbedMappings = map[string]RegExpEmojiKVP{
-		"wizardojisan":  newOmgMemKVP(`(wizard\s?)?oji[-\s]?(chan|san)`, [][]string{{WizardOjichanAmaterasu, WizardOjichanMaware, WizardOjichanBirds}}),
-		"bakey":         newOmgMemKVP(`bakey`, [][]string{{Bakey_BauBau}}),
-		"mococar":       newPhraseKVP(`mococar`, [][]string{{Mococar}}),
-		"pregnant":      newPhraseKVP(`pregnant`, [][]string{{Mint_GET_PREGNANT}}),
-		"ietaiga":       newPhraseKVP(`ietaiga`, [][]string{{ietaiga}}),
-		"hoeh":          newPhraseKVP(`hoeh`, [][]string{{HOEH}}),
-		"freak":         newPhraseKVP(`you freak`, [][]string{{nimi_youfreak}}),
-		"manilovefauna": newPhraseKVP(`man i love fauna|i miss fauna|MILF`, [][]string{{manilovefauna}}),
-		"witnessme":     newPhraseKVP(`witness me`, [][]string{{BaeYEET}}),
+		"wizardojisan":          newOmgMemKVP(`(wizard\s?)?oji[-\s]?(chan|san)`, [][]string{{WizardOjichanAmaterasu, WizardOjichanMaware, WizardOjichanBirds}}),
+		"bakey":                 newOmgMemKVP(`bakey`, [][]string{{Bakey_BauBau}}),
+		"mococar":               newPhraseKVP(`mococar`, [][]string{{Mococar}}),
+		"pregnant":              newPhraseKVP(`pregnant`, [][]string{{Mint_GET_PREGNANT}}),
+		"ietaiga":               newPhraseKVP(`ie\s?taiga`, [][]string{{ietaiga}}),
+		"hoeh":                  newPhraseKVP(`hoeh`, [][]string{{HOEH}}),
+		"freak":                 newPhraseKVP(`you freak`, [][]string{{nimi_youfreak}}),
+		"manilovefauna":         newPhraseKVP(`man\s?i\s?love\s?fauna|i\s?miss\s?fauna|MILF`, [][]string{{manilovefauna}}),
+		"witnessme":             newPhraseKVP(`witness me`, [][]string{{BaeYEET}}),
+		"massachusetts":         newPhraseKVP(`massachusetts`, [][]string{{Massachusetts}}),
+		"seagull":               newPhraseKVP(`seagull`, [][]string{{Seagull}}),
+		"butifyoucloseyoureyes": newPhraseKVP(`but if you close your eyes`, [][]string{{ButIfYouCloseYourEyes}}),
+		"a":                     RegExpEmojiKVP{RegexExpr: regexp.MustCompile(`$a^`), EmojiList: [][]string{{a}}},
 	}
 
 	// Mappings for StickerIds and emojis to react to it with
