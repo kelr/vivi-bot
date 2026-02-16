@@ -123,6 +123,7 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 		for name, holoMemKVP := range OmgMemNameMappings {
 			regexMatch := holoMemKVP.RegexExpr.FindStringIndex(m.Content)
 			if regexMatch != nil {
+				// log.Println("matched content: ", name)
 				matches = append(matches, RegexMatch{name: name, idx: regexMatch[0], KVP: holoMemKVP})
 				matchedNames[name] = true
 			}

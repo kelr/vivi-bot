@@ -31,6 +31,10 @@ const (
 	WizardOjichanBirds     = `https://cdn.discordapp.com/attachments/1463356157723672629/1463386617438802120/WizardOjichanBirds.mp4`
 	ietaiga                = `https://cdn.discordapp.com/attachments/1463356157723672629/1463369509665636473/ietaiga.mp4`
 	BaeYEET                = `https://cdn.discordapp.com/attachments/1463356157723672629/1463689980042805483/BaeYEET.mp4`
+	Massachusetts          = `https://cdn.discordapp.com/attachments/1463356157723672629/1464819879659180123/Massachusetts.mp4`
+	Seagull                = `https://cdn.discordapp.com/attachments/1463356157723672629/1465045987700637938/Seagull.mp4`
+	a                      = `https://cdn.discordapp.com/attachments/1463356157723672629/1467275809449316413/a.mp4`
+	ButIfYouCloseYourEyes  = `https://cdn.discordapp.com/attachments/1463356157723672629/1472070014168334397/ButIfYouCloseYourEyes.mp4`
 
 	// Guild bound
 	BanchouLockInSticker  = "1447975441183936736"
