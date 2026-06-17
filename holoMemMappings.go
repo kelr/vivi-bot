@@ -193,19 +193,19 @@ var (
 
 	// Mappings for phrases to check for and local files to react with
 	FileEmbedMappings = map[string]RegExpEmojiKVP{
-		"wizardojisan":          newOmgMemKVP(`(wizard\s?)?oji[-\s]?(chan|san)`, [][]string{{WizardOjichanAmaterasu, WizardOjichanMaware, WizardOjichanBirds}}),
-		"bakey":                 newOmgMemKVP(`bakey`, [][]string{{Bakey_BauBau}}),
-		"mococar":               newPhraseKVP(`mococar`, [][]string{{Mococar}}),
-		"pregnant":              newPhraseKVP(`pregnant`, [][]string{{Mint_GET_PREGNANT}}),
-		"ietaiga":               newPhraseKVP(`ie\s?taiga`, [][]string{{ietaiga}}),
-		"hoeh":                  newPhraseKVP(`hoeh`, [][]string{{HOEH}}),
-		"freak":                 newPhraseKVP(`you freak`, [][]string{{nimi_youfreak}}),
-		"manilovefauna":         newPhraseKVP(`man\s?i\s?love\s?fauna|i\s?miss\s?fauna|MILF`, [][]string{{manilovefauna}}),
-		"witnessme":             newPhraseKVP(`witness me`, [][]string{{BaeYEET}}),
-		"massachusetts":         newPhraseKVP(`massachusetts`, [][]string{{Massachusetts}}),
-		"seagull":               newPhraseKVP(`seagull`, [][]string{{Seagull}}),
-		"butifyoucloseyoureyes": newPhraseKVP(`but if you close your eyes`, [][]string{{ButIfYouCloseYourEyes}}),
-		"a":                     RegExpEmojiKVP{RegexExpr: regexp.MustCompile(`$a^`), EmojiList: [][]string{{a}}},
+		"wizardojisan": newOmgMemKVP(`(wizard\s?)?oji[-\s]?(chan|san)`, [][]string{{WizardOjichanAmaterasu, WizardOjichanMaware, WizardOjichanBirds}}),
+		"bakey":        newOmgMemKVP(`bakey`, [][]string{{Bakey_BauBau}}),
+		// "mococar":               newPhraseKVP(`mococar`, [][]string{{Mococar}}),
+		// "pregnant":              newPhraseKVP(`pregnant`, [][]string{{Mint_GET_PREGNANT}}),
+		// "ietaiga":               newPhraseKVP(`ie\s?taiga`, [][]string{{ietaiga}}),
+		// "hoeh":                  newPhraseKVP(`hoeh`, [][]string{{HOEH}}),
+		// "freak":                 newPhraseKVP(`you freak`, [][]string{{nimi_youfreak}}),
+		// "manilovefauna":         newPhraseKVP(`man\s?i\s?love\s?fauna|i\s?miss\s?fauna|MILF`, [][]string{{manilovefauna}}),
+		// "witnessme":             newPhraseKVP(`witness me`, [][]string{{BaeYEET}}),
+		// "massachusetts":         newPhraseKVP(`massachusetts`, [][]string{{Massachusetts}}),
+		// "seagull":               newPhraseKVP(`seagull`, [][]string{{Seagull}}),
+		// "butifyoucloseyoureyes": newPhraseKVP(`but if you close your eyes`, [][]string{{ButIfYouCloseYourEyes}}),
+		// "a":                     RegExpEmojiKVP{RegexExpr: regexp.MustCompile(`$a^`), EmojiList: [][]string{{a}}},
 	}
 
 	// Mappings for StickerIds and emojis to react to it with

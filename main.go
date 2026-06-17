@@ -78,8 +78,8 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 func reactToMessageWithSticker(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Sends Vivi sticker when the bot is mentioned
 	if strings.Contains(m.Content, *BotId) {
-		if rand.Intn(10) == 0 {
-			reactToUserMessage(s, m, pekora_gonnahityou)
+		if rand.Intn(3) == 0 {
+			s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{selectRandom(ViviHappyStickers)}})
 		} else {
 			s.ChannelMessageSendComplex(m.ChannelID, &discordgo.MessageSend{StickerIDs: []string{selectRandom(ViviSusStickers)}})
 		}
@@ -153,10 +153,12 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 			}
 		case "lockin":
 			s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+selectRandom(match.KVP.EmojiList[0]))
-			reactToUserMessage(s, m, "**LOCK IN**", BanchouLockInSticker)
+			if rand.Intn(3) == 0 {
+				reactToUserMessage(s, m, "", BanchouLockInSticker)
+			}
 		case "rokunana":
 			if rand.Intn(4) == 0 {
-				reactToUserMessage(s, m, selectRandom(IHateMyselfForThisForgiveMe))
+				reactToUserMessage(s, m, selectRandom(ILoveRokuNana))
 			} else {
 				s.MessageReactionAdd(m.ChannelID, m.ID, "customemoji:"+LihengzSus)
 			}
@@ -175,7 +177,7 @@ func reactToMessageWithEmoji(s *discordgo.Session, m *discordgo.MessageCreate) {
 			if rand.Intn(3) == 0 {
 				reactToUserMessage(s, m, IrohaShotgun)
 			} else {
-				reactToUserMessage(s, m, `**LOCK IN**`, BanchouLockInSticker)
+				reactToUserMessage(s, m, "", BanchouLockInSticker)
 			}
 		default:
 			for _, emojis := range match.KVP.EmojiList {

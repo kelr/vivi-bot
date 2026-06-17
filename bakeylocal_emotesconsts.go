@@ -2,7 +2,7 @@ package main
 
 // const (
 // 	/// Guild bound
-// 	BanchouLockInSticker  = "1406295250871386112"
+// 	BanchouLockInSticker  = "1489676267237146675"
 // 	ViviSusLeftSticker    = "1420380133780488312"
 // 	ViviSusCenterSticker  = "1420380133780488312"
 // 	ViviSusRightSticker   = "1420380133780488312"
@@ -1600,7 +1600,8 @@ package main
 
 // var (
 // 	// List of stickers and emojis to randomly select from
-// 	ViviSusStickers = []string{ViviSusLeftSticker, ViviSusCenterSticker, ViviSusRightSticker}
+// 	ViviSusStickers   = []string{`1462523001957384426`}
+// 	ViviHappyStickers = []string{`1388001131988521022`}
 
 // 	OmgAchanEmojis    = []string{AchanBlink, AchanCheer, Achan}
 // 	OmgAkiroseEmojis  = []string{AkiAbsoluteBliss, AkiAllAccordingtoKeikaku, AkiBliss, AkiBop, AkiHipSwayFast, AkiNom, AkiPata, AkiShake, AkiSmugNice, AkiWavy, AkiWink, AkiXD, A_AraAra, A_Otsuthal, A_Nice}

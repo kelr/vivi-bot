@@ -41,6 +41,10 @@ const (
 	ViviSusLeftSticker    = "1456174507059314861"
 	ViviSusCenterSticker  = "1457213252839932067"
 	ViviSusRightSticker   = "1457228017590861834"
+	ViviSmile             = "1511419124671316092"
+	ViviGangimari         = "1511419947295707276"
+	ViviKiraKira          = "1513189401084170431"
+	ViviYearn             = "1514243648827424878"
 	MococoHOEHSticker     = "1458986580147568650"
 	WillBeThereSticker    = "1447412433273491518"
 	MightBeThereSticker   = "1447412609165951066"
@@ -1730,7 +1734,8 @@ const (
 
 var (
 	// List of stickers and emojis to randomly select from
-	ViviSusStickers = []string{ViviSusLeftSticker, ViviSusCenterSticker, ViviSusRightSticker}
+	ViviSusStickers   = []string{ViviSusLeftSticker, ViviSusCenterSticker, ViviSusRightSticker}
+	ViviHappyStickers = []string{ViviSmile, ViviGangimari, ViviKiraKira, ViviYearn}
 
 	OmgAchanEmojis    = []string{AchanBlink, AchanCheer, Achan}
 	OmgAkiroseEmojis  = []string{AkiAbsoluteBliss, AkiAllAccordingtoKeikaku, AkiBliss, AkiBop, AkiHipSwayFast, AkiNom, AkiPata, AkiShake, AkiSmugNice, AkiWavy, AkiWink, AkiXD, A_AraAra, A_Otsuthal, A_Nice}
@@ -1825,6 +1830,6 @@ var (
 	AngryEmojis      = []string{ViviAngry, NikotanANGY, FubukiAngy, FaunaAngryYT, pekoangry2, peko_angry_3, LihengzReallyMad, HajimeHuh}
 
 	// Tenor links
-	IHateMyselfForThisForgiveMe = []string{LizRokuNana, KroniiRokuNana, BibooRokuNana, BibooRokuNana2, BaeRokuNana, GigiRokuNana, RaoraRokuNana, RissaRokuNana}
-	SuiGifs                     = []string{FirstTakeSui, SuiKabedon}
+	ILoveRokuNana = []string{LizRokuNana, KroniiRokuNana, BibooRokuNana, BibooRokuNana2, BaeRokuNana, GigiRokuNana, RaoraRokuNana, RissaRokuNana}
+	SuiGifs       = []string{FirstTakeSui, SuiKabedon}
 )
